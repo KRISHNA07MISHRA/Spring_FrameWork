@@ -55,3 +55,45 @@ In lazy initialization, a bean is created only when it is first needed. We use i
 
 Eager Initialization
 In eager initialization, beans are created during application startup. We use it when beans are required immediately and we want startup-time validation of dependencies.
+
+Aware Interfaces
+Aware interfaces allow a Spring bean to access information about the Spring container or its own configuration. We use them when a bean needs details such as its name, the application context, or other container resources.
+
+BeanNameAware
+BeanNameAware gives a bean its name assigned by the Spring container. We use it when a bean needs to know its own bean name for logging, debugging, or custom processing.
+
+ApplicationContextAware
+ApplicationContextAware provides access to the Spring ApplicationContext. We use it when a bean needs to retrieve other beans, read application properties, or access Spring resources.
+
+BeanPostProcessor
+BeanPostProcessor allows custom logic to run before and after Spring initializes a bean. We use it to modify bean properties, create proxies, or add extra functionality like logging and security.
+
+Before Initialization
+The postProcessBeforeInitialization() method runs before initialization callbacks such as @PostConstruct. We use it to validate or modify bean properties before the bean becomes ready.
+
+After Initialization
+The postProcessAfterInitialization() method runs after the bean is fully initialized. We use it to wrap beans with proxies or add features like AOP, transactions, or logging.
+
+Initialization Callbacks in Spring
+Initialization callbacks execute automatically after dependency injection is complete. We use them to perform setup tasks such as loading configuration, opening connections, or initializing resources.
+
+@PostConstruct
+@PostConstruct marks a method that runs automatically after Spring injects all dependencies. We use it to initialize resources or perform startup tasks before the bean is used.
+
+InitializingBean
+InitializingBean requires implementing the afterPropertiesSet() method, which runs after dependency injection. We use it when initialization logic must be written using the Spring interface.
+
+Custom initMethod
+A custom initMethod is specified in the @Bean annotation and runs after bean creation. We use it when we want initialization logic without using Spring-specific interfaces or annotations.
+
+Destruction Callbacks in Spring
+Destruction callbacks execute before a bean is removed from the Spring container. We use them to release resources such as database connections, files, or network sockets.
+
+@PreDestroy
+@PreDestroy marks a method that runs just before the bean is destroyed. We use it to clean up resources and perform shutdown tasks.
+
+DisposableBean
+DisposableBean requires implementing the destroy() method, which Spring calls before bean destruction. We use it when cleanup logic needs to follow the Spring interface.
+
+Custom destroyMethod
+A custom destroyMethod is specified in the @Bean annotation and runs when the bean is destroyed. We use it to perform cleanup without implementing Spring-specific interfaces or using annotations.
