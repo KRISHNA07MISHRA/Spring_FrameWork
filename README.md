@@ -97,3 +97,48 @@ DisposableBean requires implementing the destroy() method, which Spring calls be
 
 Custom destroyMethod
 A custom destroyMethod is specified in the @Bean annotation and runs when the bean is destroyed. We use it to perform cleanup without implementing Spring-specific interfaces or using annotations.
+
+
+Using @Value to Inject Properties
+
+@Value is used to inject values from application.properties or application.yml into a variable. We use it when only a few configuration values are needed.
+
+Default Values with @Value
+
+We can provide a default value using @Value("${property:defaultValue}"). We use it to prevent errors when a property is missing.
+
+Problem with Too Many @Value Annotations
+
+Using many @Value annotations makes the code difficult to read and maintain. When there are many related properties, @ConfigurationProperties is a better choice.
+
+Introduction to @ConfigurationProperties
+
+@ConfigurationProperties maps a group of related properties to a single Java class. We use it to keep configuration clean, organized, and easy to manage.
+
+Relaxed Binding in Spring Boot
+
+Relaxed binding allows Spring Boot to map property names written in different formats (camelCase, kebab-case, snake_case, uppercase). We use it to make configuration flexible and easier to write.
+
+@Value vs @ConfigurationProperties
+
+Use @Value when injecting one or two properties. Use @ConfigurationProperties when working with multiple related properties because it is cleaner, type-safe, and easier to maintain.
+
+Why We Need Runner Interfaces
+
+Runner interfaces execute code automatically after the Spring Boot application starts. We use them for initialization tasks like loading data, testing, or printing startup information.
+
+Why Not Manually Call Beans from main()
+
+The main() method should only start the Spring application. We avoid calling beans manually because Spring manages bean creation, dependency injection, and lifecycle automatically.
+
+CommandLineRunner
+
+CommandLineRunner runs automatically after the application starts and receives command-line arguments as a String[]. We use it for startup tasks such as loading initial data or running setup code.
+
+ApplicationRunner
+
+ApplicationRunner also runs after application startup but provides command-line arguments through the ApplicationArguments object. We use it when we need structured access to command-line options and arguments.
+
+Difference Between CommandLineRunner and ApplicationRunner
+
+CommandLineRunner provides arguments as a simple String[], making it suitable for basic startup tasks. ApplicationRunner provides an ApplicationArguments object with methods to access option names and values, making it better for handling complex command-line arguments.
